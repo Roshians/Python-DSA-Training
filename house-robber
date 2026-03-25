@@ -1,0 +1,16 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        dp = {}
+
+        def police(num, index, size):
+            if index >= size:
+                return 0
+            if index in dp:
+                return dp[index]
+            dp[index] = max(
+                police(nums, index + 1, size),
+                nums[index] + police(nums, index+2, size)
+            )
+            return dp[index]
+
+        return police(nums, 0, len(nums))
